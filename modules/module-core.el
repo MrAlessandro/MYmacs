@@ -1,5 +1,6 @@
 ;;; module-core.el --- Basic configurations and settings
-;;
+;; Copyright (C) 2020 Alessandro Meschi
+
 ;; Author: Alessandro Meschi <alessandro.meschi@icloud.com>
 ;; Version: 1.0.0
 
@@ -7,7 +8,7 @@
 
 ;;; Commentary:
 
-;; This file configure basic settings
+;; This file configure repositories and packages managment
 
 ;;; License:
 
@@ -15,12 +16,12 @@
 ;; modify it under the terms of the GNU General Public License
 ;; as published by the Free Software Foundation; either version 3
 ;; of the License, or (at your option) any later version.
-;;
+
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -77,7 +78,7 @@
   :config
   (which-key-mode +1))
 
-;; MacOS keyboard setup
+;; MacOS itelian keyboard setup
 (when (string-equal system-type "darwin")
   (global-set-key (kbd "s-è") "[")
   (global-set-key (kbd "s-+") "]")
@@ -87,6 +88,18 @@
         mac-command-modifier 'meta
         mac-function-modifier 'control
         select-enable-clipboard t))
+
+;; Mouse integration
+(require 'mouse) ;; needed for iterm2 compatibility
+(xterm-mouse-mode t)
+(global-set-key [mouse-4] '(lambda ()
+    (interactive)
+    (scroll-down 1)))
+(global-set-key [mouse-5] '(lambda ()
+    (interactive)
+    (scroll-up 1)))
+(setq mouse-sel-mode t)
+(defun track-mouse (e))
 
 ;; Better sorting and filtering
 (use-package prescient

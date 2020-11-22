@@ -64,11 +64,11 @@
 (require 'module-packages)
 (require 'module-core)
 (require 'module-ivy)
-(require 'module-flycheck)
-(require 'module-editing)
-(require 'module-company)
-(require 'module-lsp)
-(require 'module-coding)
+;;(require 'module-flycheck)
+;;(require 'module-editing)
+;;(require 'module-company)
+;;(require 'module-lsp)
+;;(require 'module-coding)
 (require 'module-interface)
 
 ;; Stop geerating custom code at the end of init.el
