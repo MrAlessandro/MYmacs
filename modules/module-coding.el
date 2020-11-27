@@ -52,6 +52,22 @@
 ;;   :mode
 ;;   ("\\.html?\\'" . web-mode))
 
+;; Dockerfile support
+(use-package dockerfile-mode
+  :ensure t
+  :mode "Dockerfile\\(?:\\..*\\)?\\'")
+
+;; JSON files support
+(use-package json-mode
+  :ensure t
+  :mode "\\.json\\'"
+  :mode "\\.jsonld\\'")
+
+;; YAML support
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.\\(e?ya?\\|ra\\)ml\\'")
+
 ;; Syntax checking
 (use-package flycheck
   :ensure t

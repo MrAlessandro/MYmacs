@@ -114,8 +114,29 @@
   (global-set-key (kbd "s-*") "}")
   (setq mac-option-modifier nil
         mac-command-modifier 'meta
-        mac-function-modifier 'control
-        select-enable-clipboard t))
+        mac-function-modifier 'control))
+
+;; Enable MacOS clipboard
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil)
+
+  (defun pbcopy ()
+    (interactive)
+    (call-process-region (point) (mark) "pbcopy")
+    (setq deactivate-mark t))
+
+  (defun pbpaste ()
+    (interactive)
+    (call-process-region (point) (if mark-active (mark) (point)) "pbpaste" t t))
+
+  (defun pbcut ()
+    (interactive)
+    (pbcopy)
+    (delete-region (region-beginning) (region-end)))
+
+  (global-set-key (kbd "C-c c") 'pbcopy)
+  (global-set-key (kbd "C-c v") 'pbpaste)
+  (global-set-key (kbd "C-c x") 'pbcut))
 
 ;; Mouse integration
 (require 'mouse) ;; needed for iterm2 compatibility
@@ -128,6 +149,16 @@
     (scroll-up 1)))
 (setq mouse-sel-mode t)
 (defun track-mouse (e))
+
+;; Easy shell inside emacs
+(use-package shell-pop
+  :ensure t
+  :init
+  (setq shell-pop-autocd-to-working-dir nil)
+  (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
+  (setq shell-pop-term-shell "/bin/zsh")
+  (setq shell-pop-full-span t)
+  (setq shell-pop-universal-key "C-t"))
 
 ;; Better sorting and filtering
 (use-package prescient
