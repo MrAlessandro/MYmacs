@@ -41,6 +41,7 @@
         ivy-use-selectable-prompt t)
   (setq ivy-on-del-error-function nil)
   (setq swiper-action-recenter t)
+  (setq ivy-wrap t)
   (setq ivy-extra-directories ())
   (setq ivy-initial-inputs-alist nil))
 
@@ -60,6 +61,13 @@
          ("C-x C-f" . counsel-find-file))
   :config
   (setq counsel-find-file-ignore-regexp "^\\."))
+
+;; More friendly interface for ivy
+(use-package ivy-rich
+  :ensure t
+  :hook ((ivy-mode . ivy-rich-mode))
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 ;; Better 'M-x' visualization with amx
 (use-package amx

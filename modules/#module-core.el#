@@ -62,19 +62,6 @@
   :init
   (setq uniquify-buffer-name-style 'forward))
 
-;; Colorie ansi codes
-(use-package ansi-color
-  :preface
-  (defun display-ansi-colors ()
-    (interactive)
-    (ansi-color-apply-on-region (point-min) (point-max)))
-
-  (defun colorize-compilation-buffer ()
-    (read-only-mode -1)
-    (ansi-color-apply-on-region compilation-filter-start (point))
-    (read-only-mode +1))
-  :hook ((compilation-filter-hook . colorize-compilation-buffer)))
-
 ;; Enable history saving at eymacs's startup
 (add-hook 'after-init-hook 'savehist-mode)
 

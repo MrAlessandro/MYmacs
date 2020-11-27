@@ -1,5 +1,6 @@
 ;;; module-editing.el --- Editing configurations and settings
-;;
+;; Copyright (C) 2020 Alessandro Meschi
+
 ;; Author: Alessandro Meschi <alessandro.meschi@icloud.com>
 ;; Version: 1.0.0
 
@@ -7,7 +8,7 @@
 
 ;;; Commentary:
 
-;; This file configure editing settings
+;; This file configure repositories and packages managment
 
 ;;; License:
 
@@ -15,12 +16,12 @@
 ;; modify it under the terms of the GNU General Public License
 ;; as published by the Free Software Foundation; either version 3
 ;; of the License, or (at your option) any later version.
-;;
+
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -77,7 +78,8 @@
 ;; Smarter buffer begin/end commands
 (use-package crux
   :ensure t
-  :bind (("C-a" . crux-move-beginning-of-line)))
+  :bind (("C-a" . crux-move-beginning-of-line)
+         ("C-c d" . crux-duplicate-current-line-or-region)))
 
 ;; Code folding
 (use-package origami

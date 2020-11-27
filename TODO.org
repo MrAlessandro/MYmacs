@@ -1,0 +1,4 @@
+# TODO
+- CUA mode [https://www.emacswiki.org/emacs/CuaMode]
+- Deft mode
+- ido?

@@ -48,6 +48,19 @@
   (add-to-list 'default-frame-alist
                '(ns-appearance . dark)))
 
+;; Colorize ansi codes
+(use-package ansi-color
+  :preface
+  (defun display-ansi-colors ()
+    (interactive)
+    (ansi-color-apply-on-region (point-min) (point-max)))
+
+  (defun colorize-compilation-buffer ()
+    (read-only-mode -1)
+    (ansi-color-apply-on-region compilation-filter-start (point))
+    (read-only-mode +1))
+  :hook ((compilation-filter-hook . colorize-compilation-buffer)))
+
 ;; Maximize window on startup
 (when (display-graphic-p)
   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
@@ -55,18 +68,20 @@
 ;; Disable the annoying bell ring
 (setq ring-bell-function 'ignore)
 
+;; Show colun number in modeline
+(setq column-number-mode t)
+
+;; Set maximum font decoration
+(setq font-lock-maximum-decoration t)
+
+;; Disable shift for selecting
+(setq shift-select-mode nil)
+
 ;; Disable startup buffer
 (setq inhibit-splash-screen t)
 
 ;; Welcome message
 (setq initial-scratch-message (concat ";; Welcome to emacs, " user-full-name "!\n;;\n;;"))
-
-;; Better ivy visualization
-;; (use-package ivy-rich
-;;   :ensure t
-;;   :hook ((ivy-mode . ivy-rich-mode))
-;;   :config
-;;   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 ;; Better flycheck visualization
 ;; Display Flycheck errors in GUI tooltips
