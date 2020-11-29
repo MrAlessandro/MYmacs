@@ -63,6 +63,7 @@
   (setq uniquify-buffer-name-style 'forward))
 
 ;; Colorie ansi codes
+(require 'compile)
 (use-package ansi-color
   :preface
   (defun display-ansi-colors ()
@@ -75,7 +76,7 @@
     (read-only-mode +1))
   :hook ((compilation-filter-hook . colorize-compilation-buffer)))
 
-;; Enable history saving at eymacs's startup
+;; Enable history saving at emacs's startup
 (add-hook 'after-init-hook 'savehist-mode)
 
 ;; Save position in file
@@ -95,7 +96,11 @@
 ;; Keep dired in one buffer
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; Delete files movin the to trash
+(setq delete-by-moving-to-trash t)
+
 ;; Always delete and copy recursively in dired
+(require 'dired)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
 
@@ -107,14 +112,11 @@
   (which-key-mode +1))
 
 ;; MacOS itelian keyboard setup
-(when (string-equal system-type "darwin")
-  (global-set-key (kbd "s-è") "[")
-  (global-set-key (kbd "s-+") "]")
-  (global-set-key (kbd "s-é") "{")
-  (global-set-key (kbd "s-*") "}")
-  (setq mac-option-modifier nil
-        mac-command-modifier 'meta
-        mac-function-modifier 'control))
+;; (when (string-equal system-type "darwin")
+;;   (global-set-key (kbd "s-è") "[")
+;;   (global-set-key (kbd "s-+") "]")
+;;   (global-set-key (kbd "s-é") "{")
+;;   (global-set-key (kbd "s-*") "}"))
 
 ;; Enable MacOS clipboard
 (when (string= system-type "darwin")
@@ -145,10 +147,9 @@
     (interactive)
     (scroll-down 1)))
 (global-set-key [mouse-5] '(lambda ()
-    (interactive)
-    (scroll-up 1)))
-(setq mouse-sel-mode t)
-(defun track-mouse (e))
+                             (interactive)
+                             (scroll-up 1)))
+
 
 ;; Easy shell inside emacs
 (use-package shell-pop

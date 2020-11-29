@@ -49,21 +49,22 @@
                '(ns-appearance . dark)))
 
 ;; Colorize ansi codes
-(use-package ansi-color
-  :preface
-  (defun display-ansi-colors ()
-    (interactive)
-    (ansi-color-apply-on-region (point-min) (point-max)))
-
-  (defun colorize-compilation-buffer ()
-    (read-only-mode -1)
-    (ansi-color-apply-on-region compilation-filter-start (point))
-    (read-only-mode +1))
-  :hook ((compilation-filter-hook . colorize-compilation-buffer)))
+(defun colorize-compilation-buffer ()
+  (read-only-mode -1)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (read-only-mode +1))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+(add-hook 'shell-mode-hook
+          (lambda () (face-remap-set-base 'comint-highlight-prompt :inherit nil)))
 
 ;; Maximize window on startup
 (when (display-graphic-p)
   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
+
+;; Setup margins and fringes
+;; (setq left-fringe-width 1 right-fringe-width 4
+;;       left-margin-width 0 right-margin-width 4)
 
 ;; Disable the annoying bell ring
 (setq ring-bell-function 'ignore)
@@ -116,7 +117,9 @@
 ;; Show lines number
 (use-package linum
   :diminish
-  :hook ((prog-mode . linum-mode)))
+  :hook ((prog-mode . linum-mode))
+  :config
+  (setq linum-format "%d "))
 
 ;; Rainbow mode
 (use-package rainbow-mode
@@ -150,13 +153,12 @@
 (setq scroll-conservatively  10000)
 
 ;; Load monokai theme
-;; (use-package monokai-theme
-;;   :ensure t
-;;   :defer t)
+(use-package monokai-theme
+  :ensure t
+  :defer t)
 
 ;; Set theme for GUI
-;; (when (display-graphic-p)
-;;   (load-theme 'monokai t))
+(load-theme 'monokai t)
 
 (provide 'module-interface)
 ;;; module-interface.el ends here

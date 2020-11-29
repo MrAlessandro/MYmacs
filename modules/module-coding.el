@@ -74,7 +74,11 @@
   :diminish
   :hook ((prog-mode . flycheck-mode))
   :config
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  (setq flycheck-indication-mode 'right-margin))
+
+(eval-after-load "flycheck"
+  '(add-hook 'flycheck-mode-hook 'flycheck-indicator-mode))
 
 ;; Completion
 (use-package company
