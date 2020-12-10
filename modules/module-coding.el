@@ -75,10 +75,14 @@
   :hook ((prog-mode . flycheck-mode))
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-  (setq flycheck-indication-mode 'right-margin))
+  (when (not (display-graphic-p))
+     (setq-default flycheck-indication-mode 'left-margin)
+     (add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)))
 
-(eval-after-load "flycheck"
-  '(add-hook 'flycheck-mode-hook 'flycheck-indicator-mode))
+  ;; Set faces for flycheck
+  ;; (when (not (display-graphic-p))
+  ;;   (set-face-attribute 'flycheck-error nil :foreground "red")
+  ;;   (set-face-attribute 'flycheck-warning nil :foreground "yellow")))
 
 ;; Completion
 (use-package company
@@ -95,69 +99,69 @@
   ;; Activating globally
   (global-company-mode t))
 
-;; PHP completion
-(use-package company-php
-  :ensure t
-  :defer
-  :after company)
-
-;; Better sorting and filtering for company
-(use-package company-prescient
-  :ensure t
-  :after prescient
-  :hook ((company-mode . company-prescient-mode)))
-
-;; Show documentation idle on company completion
-(use-package company-quickhelp
-  :ensure t
-  :after company
-  :diminish
-  :config
-  (company-quickhelp-mode 1))
-
-;; Pretty print for lisp
-(use-package ipretty
-  :ensure t)
-
-;; Indentation
-;; (use-package parinfer
+;; ;; PHP completion
+;; (use-package company-php
 ;;   :ensure t
-;;   :bind (("C-," . parinfer-toggle-mode))
-;;   :hook ((prog-mode . parinfer-mode))
-;;   :init
-;;   (setq parinfer-extensions '(defaults        ; should be included.
-;;                                pretty-parens  ; different paren styles for different modes.
-;;                                paredit        ; Introduce some paredit commands.
-;;                                smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-;;                                smart-yank)))  ; Yank behavior depend on mode.
+;;   :defer
+;;   :after company)
 
-(use-package aggressive-indent
-  :ensure t
-  :hook ((prog-mode . aggressive-indent-mode)))
-
-;; Indentation guides
-(use-package indent-guide
-  :ensure t
-  :hook ((prog-mode . indent-guide-mode)))
-
-;; JAVA
-;; (use-package lsp-java
+;; ;; Better sorting and filtering for company
+;; (use-package company-prescient
 ;;   :ensure t
-;;   :requires (lsp-ui-flycheck lsp-ui-sideline)
-;;   :hook
-;;   (java-mode . (lambda () (add-to-list (make-local-variable 'company-backends) 'company-lsp)))
-;;   (java-mode . lsp)
-;;   (java-mode . flycheck-mode)
-;;   (java-mode . (lambda () (lsp-ui-flycheck-enable t)))
-;;   (java-mode . lsp-ui-sideline-mode)
+;;   :after prescient
+;;   :hook ((company-mode . company-prescient-mode)))
+
+;; ;; Show documentation idle on company completion
+;; (use-package company-quickhelp
+;;   :ensure t
+;;   :after company
+;;   :diminish
 ;;   :config
-;;   (setq lsp-java-save-action-organize-imports t))
+;;   (company-quickhelp-mode 1))
 
-;; Shell scripting
-;; (use-package company-shell
+;; ;; Pretty print for lisp
+;; (use-package ipretty
+;;   :ensure t)
+
+;; ;; Indentation
+;; ;; (use-package parinfer
+;; ;;   :ensure t
+;; ;;   :bind (("C-," . parinfer-toggle-mode))
+;; ;;   :hook ((prog-mode . parinfer-mode))
+;; ;;   :init
+;; ;;   (setq parinfer-extensions '(defaults        ; should be included.
+;; ;;                                pretty-parens  ; different paren styles for different modes.
+;; ;;                                paredit        ; Introduce some paredit commands.
+;; ;;                                smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+;; ;;                                smart-yank)))  ; Yank behavior depend on mode.
+
+;; (use-package aggressive-indent
 ;;   :ensure t
-;;   :hook
-;;   (sh-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-shell company-shell-env company-fish-shell)))))
+;;   :hook ((prog-mode . aggressive-indent-mode)))
+
+;; ;; Indentation guides
+;; (use-package indent-guide
+;;   :ensure t
+;;   :hook ((prog-mode . indent-guide-mode)))
+
+;; ;; JAVA
+;; ;; (use-package lsp-java
+;; ;;   :ensure t
+;; ;;   :requires (lsp-ui-flycheck lsp-ui-sideline)
+;; ;;   :hook
+;; ;;   (java-mode . (lambda () (add-to-list (make-local-variable 'company-backends) 'company-lsp)))
+;; ;;   (java-mode . lsp)
+;; ;;   (java-mode . flycheck-mode)
+;; ;;   (java-mode . (lambda () (lsp-ui-flycheck-enable t)))
+;; ;;   (java-mode . lsp-ui-sideline-mode)
+;; ;;   :config
+;; ;;   (setq lsp-java-save-action-organize-imports t))
+
+;; ;; Shell scripting
+;; ;; (use-package company-shell
+;; ;;   :ensure t
+;; ;;   :hook
+;; ;;   (sh-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-shell company-shell-env company-fish-shell)))))
 
 (provide 'module-coding)
 ;;; module-coding.el ends here

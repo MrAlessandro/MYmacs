@@ -150,7 +150,6 @@
                              (interactive)
                              (scroll-up 1)))
 
-
 ;; Easy shell inside emacs
 (use-package shell-pop
   :ensure t

@@ -115,11 +115,14 @@
 (add-hook 'after-init-hook #'show-paren-mode)
 
 ;; Show lines number
-(use-package linum
+(use-package display-line-numbers
   :diminish
-  :hook ((prog-mode . linum-mode))
-  :config
-  (setq linum-format "%d "))
+  :hook ((prog-mode . display-line-numbers-mode)))
+;; (use-package linum
+;;   :diminish
+;;   :hook ((prog-mode . linum-mode))
+;;   :config
+;;   (setq linum-format "%d "))
 
 ;; Rainbow mode
 (use-package rainbow-mode
