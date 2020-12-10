@@ -79,11 +79,6 @@
      (setq-default flycheck-indication-mode 'left-margin)
      (add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)))
 
-  ;; Set faces for flycheck
-  ;; (when (not (display-graphic-p))
-  ;;   (set-face-attribute 'flycheck-error nil :foreground "red")
-  ;;   (set-face-attribute 'flycheck-warning nil :foreground "yellow")))
-
 ;; Completion
 (use-package company
   :ensure t
@@ -119,30 +114,19 @@
 ;;   :config
 ;;   (company-quickhelp-mode 1))
 
-;; ;; Pretty print for lisp
-;; (use-package ipretty
-;;   :ensure t)
+;; Pretty print for lisp
+(use-package ipretty
+  :ensure t)
 
-;; ;; Indentation
-;; ;; (use-package parinfer
-;; ;;   :ensure t
-;; ;;   :bind (("C-," . parinfer-toggle-mode))
-;; ;;   :hook ((prog-mode . parinfer-mode))
-;; ;;   :init
-;; ;;   (setq parinfer-extensions '(defaults        ; should be included.
-;; ;;                                pretty-parens  ; different paren styles for different modes.
-;; ;;                                paredit        ; Introduce some paredit commands.
-;; ;;                                smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-;; ;;                                smart-yank)))  ; Yank behavior depend on mode.
+;; Indentation
+(use-package aggressive-indent
+  :ensure t
+  :hook ((prog-mode . aggressive-indent-mode)))
 
-;; (use-package aggressive-indent
-;;   :ensure t
-;;   :hook ((prog-mode . aggressive-indent-mode)))
-
-;; ;; Indentation guides
-;; (use-package indent-guide
-;;   :ensure t
-;;   :hook ((prog-mode . indent-guide-mode)))
+;; Indentation guides
+(use-package indent-guide
+  :ensure t
+  :hook ((prog-mode . indent-guide-mode)))
 
 ;; ;; JAVA
 ;; ;; (use-package lsp-java
