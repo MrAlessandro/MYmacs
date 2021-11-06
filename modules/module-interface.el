@@ -41,15 +41,15 @@
   (menu-bar-mode -1))
 
 ;; Some MacOS interface setup
-(when  (and (string-equal system-type "darwin") (display-graphic-p))
-  (add-to-list 'default-frame-alist
-               '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist
-               '(ns-appearance . dark)))
+; (when  (and (string-equal system-type "darwin") (display-graphic-p))
+;   (add-to-list 'default-frame-alist
+;                '(ns-transparent-titlebar . t))
+;   (add-to-list 'default-frame-alist
+;                '(ns-appearance . dark)))
 
 ;; Maximize window on startup
-(when (display-graphic-p)
-  (add-to-list 'default-frame-alist '(fullscreen . maximized)))
+; (when (display-graphic-p)
+;   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
 
 ;; Disable the annoying bell ring
 (setq ring-bell-function 'ignore)
@@ -58,7 +58,7 @@
 (setq inhibit-splash-screen t)
 
 ;; Welcome message
-(setq initial-scratch-message (concat ";;Welcome to emacs, " user-full-name "!\n;;\n;;"))
+(setq initial-scratch-message (concat ";; Welcome to MYmacs, " user-full-name "!\n;;\n;;"))
 
 ;; Better 'M-x' visualization
 (use-package amx
@@ -75,21 +75,21 @@
 
 ;; Better flycheck visualization
 ;; Display Flycheck errors in GUI tooltips
-(if (display-graphic-p)
-    (if (>= emacs-major-version 26)
-        (use-package flycheck-posframe
-          :ensure t
-          :hook (flycheck-mode . flycheck-posframe-mode)
-          :config (add-to-list 'flycheck-posframe-inhibit-functions
-                               #'(lambda () (bound-and-true-p company-backend))))
-      (use-package flycheck-pos-tip
-        :ensure t
-        :defines flycheck-pos-tip-timeout
-        :hook (global-flycheck-mode . flycheck-pos-tip-mode)
-        :config (setq flycheck-pos-tip-timeout 30)))
-  (use-package flycheck-popup-tip
-    :ensure t
-    :hook (flycheck-mode . flycheck-popup-tip-mode)))
+; (if (display-graphic-p)
+;     (if (>= emacs-major-version 26)
+;         (use-package flycheck-posframe
+;           :ensure t
+;           :hook (flycheck-mode . flycheck-posframe-mode)
+;           :config (add-to-list 'flycheck-posframe-inhibit-functions
+;                                #'(lambda () (bound-and-true-p company-backend))))
+;       (use-package flycheck-pos-tip
+;         :ensure t
+;         :defines flycheck-pos-tip-timeout
+;         :hook (global-flycheck-mode . flycheck-pos-tip-mode)
+;         :config (setq flycheck-pos-tip-timeout 30)))
+;   (use-package flycheck-popup-tip
+;     :ensure t
+;     :hook (flycheck-mode . flycheck-popup-tip-mode)))
 
 ;; Display time and date in modeline
 (setq display-time-day-and-date t)
@@ -107,6 +107,9 @@
 (use-package linum
   :diminish
   :hook ((prog-mode . linum-mode)))
+
+;; Separate lines number from code
+(setq linum-format "%4d \u2502 ")
 
 ;; Rainbow mode
 (use-package rainbow-mode
@@ -129,24 +132,24 @@
   :hook ((after-init . zoom-mode)))
 
 ;; Move through buffers
-(global-set-key (kbd "S-<left>")  'windmove-left)
-(global-set-key (kbd "S-<right>") 'windmove-right)
-(global-set-key (kbd "S-<up>")    'windmove-up)
-(global-set-key (kbd "S-<down>")  'windmove-down)
-(setq windmove-wrap-around t)
+; (global-set-key (kbd "S-<left>")  'windmove-left)
+; (global-set-key (kbd "S-<right>") 'windmove-right)
+; (global-set-key (kbd "S-<up>")    'windmove-up)
+; (global-set-key (kbd "S-<down>")  'windmove-down)
+; (setq windmove-wrap-around t)
 
 ;; Smooth scrolling
 (setq scroll-step            1)
 (setq scroll-conservatively  10000)
 
 ;; Load monokai theme
-(use-package monokai-theme
-  :ensure t
-  :defer t)
+; (use-package monokai-theme
+;   :ensure t
+;   :defer t)
 
 ;; Set theme for GUI
-(when (display-graphic-p)
-  (load-theme 'monokai t))
+; (when (display-graphic-p)
+;   (load-theme 'monokai t))
 
 (provide 'module-interface)
 ;;; module-interface.el ends here

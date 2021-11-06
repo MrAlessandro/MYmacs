@@ -44,10 +44,10 @@
   (setq ivy-initial-inputs-alist nil))
 
 ;; Better sorting and filtering for IVY
-(use-package ivy-prescient
-  :ensure t
-  :diminish
-  :hook ((ivy-mode . ivy-prescient-mode)))
+; (use-package ivy-prescient
+;   :ensure t
+;   :diminish
+;   :hook ((ivy-mode . ivy-prescient-mode)))
 
 ;; Counsel
 (use-package counsel
@@ -59,11 +59,11 @@
          ("C-x C-f" . counsel-find-file)))
 
 ;; Ivy integration for Projectile
-(use-package counsel-projectile
-  :ensure t
-  :diminish
-  :config
-  (counsel-projectile-mode 1))
+; (use-package counsel-projectile
+;   :ensure t
+;   :diminish
+;   :config
+;   (counsel-projectile-mode 1))
 
 (provide 'module-ivy)
 ;;; module-ivy.el ends here

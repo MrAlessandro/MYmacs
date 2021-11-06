@@ -54,6 +54,9 @@
 ;; Enable history saving at eymacs's startup
 (add-hook 'after-init-hook 'savehist-mode)
 
+;; Disable lock files
+(setq create-lockfiles nil)
+
 ;; Save position in file
 (save-place-mode 1)
 
@@ -78,15 +81,15 @@
   (which-key-mode +1))
 
 ;; MacOS keyboard setup
-(when (string-equal system-type "darwin")
-  (global-set-key (kbd "s-è") "[")
-  (global-set-key (kbd "s-+") "]")
-  (global-set-key (kbd "s-é") "{")
-  (global-set-key (kbd "s-*") "}")
-  (setq mac-option-modifier nil
-        mac-command-modifier 'meta
-        mac-function-modifier 'control
-        select-enable-clipboard t))
+; (when (string-equal system-type "darwin")
+;   (global-set-key (kbd "s-è") "[")
+;   (global-set-key (kbd "s-+") "]")
+;   (global-set-key (kbd "s-é") "{")
+;   (global-set-key (kbd "s-*") "}")
+;   (setq mac-option-modifier nil
+;         mac-command-modifier 'meta
+;         mac-function-modifier 'control
+;         select-enable-clipboard t))
 
 ;; Better sorting and filtering
 (use-package prescient

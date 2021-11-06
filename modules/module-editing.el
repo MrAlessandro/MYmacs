@@ -36,7 +36,7 @@
 (setq-default tab-width 4)            ;; but maintain correct appearance
 
 ;; Newline at end of file
-(setq require-final-newline t)
+;;(setq require-final-newline t)
 
 ;; Smart parenthesis
 (use-package smartparens
