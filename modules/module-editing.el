@@ -38,6 +38,24 @@
 ;; Newline at end of file
 ;;(setq require-final-newline t)
 
+;; Set bar cursor
+                                        ;(setq-default cursor-type 'bar)
+
+;; Setup mouse integration inside terminal
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] (lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] (lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+  )
+
+
 ;; Smart parenthesis
 (use-package smartparens
   :ensure t
@@ -51,19 +69,19 @@
 (delete-selection-mode t)
 
 ;; Smart replacing
-(use-package anzu
-  :ensure t
-  :bind (("M-%" . anzu-query-replace)
-         ("C-M-%" . anzu-query-replace-regexp))
-  :config
-  (global-anzu-mode))
+                                        ; (use-package anzu
+                                        ;   :ensure t
+                                        ;   :bind (("M-%" . anzu-query-replace)
+                                        ;          ("C-M-%" . anzu-query-replace-regexp))
+                                        ;   :config
+                                        ;   (global-anzu-mode))
 
 ;; Move text
-(use-package move-text
-  :ensure t
-  :bind
-  (([(meta shift up)] . move-text-up)
-   ([(meta shift down)] . move-text-down)))
+                                        ; (use-package move-text
+                                        ;   :ensure t
+                                        ;   :bind
+                                        ;   (([(meta shift up)] . move-text-up)
+                                        ;    ([(meta shift down)] . move-text-down)))
 
 ;; Remove automatically whitespaces
 (add-hook 'before-save-hook 'whitespace-cleanup)

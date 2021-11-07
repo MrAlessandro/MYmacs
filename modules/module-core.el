@@ -54,6 +54,13 @@
 ;; Enable history saving at eymacs's startup
 (add-hook 'after-init-hook 'savehist-mode)
 
+;; Exec path from shell
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (setq byte-compile-warnings '(cl-functions))
+  (exec-path-from-shell-initialize))
+
 ;; Disable lock files
 (setq create-lockfiles nil)
 

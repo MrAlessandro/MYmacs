@@ -104,12 +104,17 @@
 (add-hook 'after-init-hook #'show-paren-mode)
 
 ;; Show lines number
-(use-package linum
-  :diminish
-  :hook ((prog-mode . linum-mode)))
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(setq display-line-numbers-grow-only t)
+; (use-package linum
+;   :diminish
+;   :hook ((prog-mode . linum-mode)))
 
 ;; Separate lines number from code
+(setq display-line-numbers "%4d \u2502 ")
 (setq linum-format "%4d \u2502 ")
+
+
 
 ;; Rainbow mode
 (use-package rainbow-mode

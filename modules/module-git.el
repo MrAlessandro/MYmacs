@@ -1,4 +1,4 @@
-;;; module-flycheck.el --- Syntax checking configurations
+;;; module-git.el --- VCS support configuration
 ;;
 ;; Author: Alessandro Meschi <alessandro.meschi@icloud.com>
 ;; Version: 1.0.0
@@ -7,7 +7,7 @@
 
 ;;; Commentary:
 
-;; This file configure MYmacs' syntax checking
+;; This file configure editing settings
 
 ;;; License:
 
@@ -28,14 +28,15 @@
 
 ;;; Code:
 
-;; Syntax checking
-(use-package flycheck
+;; Display git diff hints on lines
+(use-package git-gutter
   :ensure t
-  :diminish
-  :init
-  (global-flycheck-mode)
   :config
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+  (global-git-gutter-mode +1)
+  (custom-set-variables '(git-gutter:window-width 2)
+                        '(git-gutter:modified-sign "~")
+                        '(git-gutter:added-sign "+")
+                        '(git-gutter:deleted-sign "-")))
 
-(provide 'module-flycheck)
-;;; module-flycheck.el ends here
+(provide 'module-git)
+;;; module-git.el ends here
